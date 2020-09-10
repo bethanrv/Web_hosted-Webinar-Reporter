@@ -1,0 +1,512 @@
+</!DOCTYPE html>
+<html>
+<head>
+	<title>Reed Tech Webinar Attendance Report</title>
+
+	<link rel="icon" type="image/x-icon" href="reedtechimage.jpg">
+	<link rel="stylesheet" href="main.css">
+	<!-- latest bootstrap css styling -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+
+
+	<!-- Materialize CDN -->
+    <!-- Compiled and minified CSS
+  	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    Compiled and minified JavaScript
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+	-->
+
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+	<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+</head>
+
+
+
+
+
+<body>
+
+
+	<div class="row">
+		<div class="centerAlign
+					blueHeader
+					fontCourier
+					col-sm-12">
+
+			<p1 class="textColorWhite">
+				Reed Tech Webinar Reporter
+			</p1>
+		</div>
+	</div>
+
+	<!--spacing-->
+	<div class="row">
+		<p class="textColorWhite">
+			spacing
+		</p>
+	</div>
+
+	<!-- Reed tech image -->
+	<div class="row justify-content-center">
+		<div>
+		<a href="https://www.reedtech.com/" target="_blank">
+		<img src="reedtechimage.jpg"
+				 class="img-fluid"
+				 alt="Responsive image"
+				 width="100">
+		<a>
+		</div>
+		<pS1 class="textColorWhite">
+			spacing
+		</pS1>
+
+		<p class="fontCourier italics col-sm-12">
+		Reed Tech - A LexisNexis Comapny
+		</p>
+	</div>
+
+	<!--spacing-->
+	<div class="row">
+		<p class="textColorWhite">
+			spacing
+		</p>
+	</div>
+
+
+	<!-- bootstrap from group - form text area -->
+	<form id = "forms" class="container text-center">
+		<div class="row justify-content-center fontCourier 						centerAlign col-sm-24">
+		<!--sign up eamils-->
+		<div class="form-group">
+			<div class="col-sm-12">
+				<labal for="SignUpArea">Sign Up Emails</labal>
+				<textarea class="form-control" id="SignUpArea">
+				</textarea>
+			</div>
+		</div>
+		<!--Attended emails-->
+		<div class="form-group">
+			<div class="col-sm-12">
+				<labal for="AttendedArea">Attended Emails</labal>
+				<textarea class="form-control" id="AttendedArea"></textarea>
+			</div>
+		</div>
+		</div>
+	</form>
+
+
+	<!--generation button ... circular??? think about it-->
+	<div class="container textColorWhite fontCourier text-center">
+
+		<button id ="genBtn" type="button" class="btn btn-success fontCourier" style="background-color: green;" onclick="generate()">Generate
+		</button>
+
+	</div>
+
+
+	<!-- Table for results -->
+	<div id="table" align="center" style="display: none">
+
+		<sp class="row" style="color:white;"> Space </sp>
+
+
+
+		<h class="fontCourier" >
+			Employees who missed out...
+		</h>
+
+
+		<!--<sp class="row spacing" style="font-size:0em"> </sp>-->
+
+		<group class="row">
+			<fill class="col-sm-3">  </fill>
+			<t id="results" class="fontCourier col-sm-9" align="left">	</t>
+		</group>
+
+		<!--<sp class="row spacing"> </sp>-->
+		<!--<sp class="row spacing"> </sp>-->
+
+		<table id="tbl" class="table">
+
+
+
+		</table>
+
+
+
+	</div>
+
+	<!-- Materialize btn
+
+		    <button type="button" class="btn btn-default btn-circle btn-xl"></button>
+	        <button type="button" class="btn btn-primary btn-circle btn-xl"></button>
+	        <button type="button" class="btn btn-success btn-circle btn-xl"></button>
+	        <button type="button" class="btn btn-info btn-circle btn-xl"></button>
+	        <button type="button" class="btn btn-warning btn-circle btn-xl"></button>
+	        -->
+
+	        <div class="row">
+
+	        </div>
+
+	        <div>
+	     	   <button id = "fab" type="button" class="btn btn-danger btn-circle btn-xl fontCourier" style="position: fixed; display: none; right:5vh; top: 80vh; font-size: 2em; font-weight: bold" onclick="expand()">
+
+	     	   	<i class="material-icons">add</i>
+
+	     	   </button>
+
+
+	     	   <button id = "downloadBtn" onmouseover="showName('Download')"  type="button" class="btn btn-primary btn-circle btn-xl fontCourier" onclick="download()" style="position: fixed; display: none; right:17vh; top: 80vh; font-size: 2em; font-weight: bold">
+
+	     	   	<i class="material-icons">arrow_downward</i>
+
+
+
+	     	   </button>
+
+
+
+	     	   	<button class="btn btn-light fontCourier" id="popUpDlSuccess" style="position: fixed; display: none; right:13vh; top: 72vh; font-size: .75em; ">Downloading...</button>
+
+	     	   	 <button class="btn btn-light fontCourier" id="popUpDl"style="position: fixed; display: none; right:15vh; top: 72vh; ">Download</button>
+
+
+	     	   <button id = "copyBtn" type="button" class="btn btn-success btn-circle btn-xl fontCourier" onclick="copy()" onmouseover="showName('Copy')" style="position: fixed; display: none; right:29vh; top: 80vh; font-size: 2em; font-weight: bold">
+
+	     	   	<i class="material-icons">attach_file</i>
+
+	     	   </button>
+
+
+	     	   <button class="btn btn-light fontCourier" id="popUpCopy" style="position: fixed; display: none; right:30vh; top: 72vh; ">Copy</button>
+
+
+	     	   <button class="btn btn-light fontCourier" id="popUpCopySuccess" style="position: fixed; display: none; right:29vh; top: 72vh; font-size: .75em; ">Copied</button>
+
+
+	     	   <button id = "shareBtn" type="button" class="btn btn-warning btn-circle btn-xl fontCourier" style="position: fixed; display: none; right:41vh; top: 80vh; font-size: 2em; font-weight: bold" onclick="share()" onmouseover="showName('Share')">
+
+	     	   	<i class="material-icons" style="color: white">thumb_up</i>
+
+	     	   </button>
+
+     	     	<button class="btn btn-light fontCourier" id="popUpShareSuccess" style="position: fixed; display: none; right:38vh; top: 72vh; font-size: .75em; ">Copied Link!</button>
+
+	     	   <button class="btn btn-light fontCourier" id="popUpShare"style="position: fixed; display: none; right:41vh; top: 72vh; ">Share</button>
+
+
+	    	</div>
+
+
+		<sp class="row spacing"> space </sp>
+		<sp class="row spacing"> space </sp>
+
+	<!-- footer -->
+	<div id = "footer" class="footer">
+		<p style="padding-left: 10px">
+			Dev: Brian Rodgers Vargo</br>
+			Contact: Rodgerb@MiamiOh.edu</br>
+		</p>
+
+	</div>
+
+
+	<!-- JS Functionallity -->
+	<script >
+	//src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"
+
+	//prorities....
+	//formating table
+	//download btn
+	//copy emails/all
+
+
+
+		var results = [];
+		var flag = true;
+		var formatedResults = "";
+		var sd = 1000; //speed of animation
+
+
+		function showName(str){
+
+			var popUpCopy = document.getElementById("popUpCopy");
+			var popUpDl = document.getElementById("popUpDl");
+			var popUpShare = document.getElementById("popUpShare");
+			console.log(str);
+
+			var popUp;
+
+			collapse();
+
+			if(str === "Download"){
+				var popUp = document.getElementById("popUpDl");
+
+			}
+			else if(str === "Copy"){
+				var popUp = document.getElementById("popUpCopy");
+			}
+			else if(str === "Share"){
+				var popUp = document.getElementById("popUpShare");
+			}
+
+			popUp.style.display = "block";
+			setTimeout(function(){
+				popUp.style.display = "none";
+			}, sd);
+
+		}
+
+		function collapse(){
+			var popUpCopy = document.getElementById("popUpCopy");
+			var popUpDl = document.getElementById("popUpDl");
+			var popUpShare = document.getElementById("popUpShare");
+
+			popUpCopy.style.display = "none";
+			popUpDl.style.display = "none";
+			popUpShare.style.display = "none";
+		}
+
+
+		function expand(){
+
+			var mainBtn = document.getElementById("fab");
+			var downloadBtn = document.getElementById("downloadBtn");
+			var copyBtn = document.getElementById("copyBtn");
+			var shareBtn = document.getElementById("shareBtn");
+
+
+			if(downloadBtn.style.display == "none"){
+				downloadBtn.style.display = "block";
+				copyBtn.style.display = "block";
+				shareBtn.style.display = "block";
+				mainBtn.innerHTML = "<i class='material-icons'>close</i>";
+			}
+			else{
+				downloadBtn.style.display = "none";
+				copyBtn.style.display = "none";
+				shareBtn.style.display = "none";
+				mainBtn.innerHTML = "<i class='material-icons'>add</i>";
+			}
+		}
+
+		function share(){
+			//copy link
+			var share = document.createElement("textarea");
+			share.value = "tinyurl.com/webinarReporter";
+			document.body.appendChild(share);
+			share.select();
+			try {
+			    var successful = document.execCommand("copy");
+			    var msg = successful ? 'successful' : 'unsuccessful';
+			    console.log('Copying text command was ' + msg);
+			  } catch (err) {
+			    console.log('Oops, unable to copy');
+			  }
+			  share.style.display = "none";
+
+
+			  collapse();
+			var msg = document.getElementById("popUpShareSuccess");
+			msg.style.display = "block";
+			setTimeout(function(){
+				msg.style.display = "none";
+			}, sd);
+
+
+
+		}
+
+		function download(){
+			var dlpopUp = document.getElementById("popUpDlSuccess");
+
+
+
+			  var element = document.createElement('a');
+			  element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(formatedResults));
+			  element.setAttribute('download', 'results');
+
+			  element.style.display = 'none';
+			  document.body.appendChild(element);
+
+			  element.click();
+
+			  document.body.removeChild(element);
+
+
+
+			collapse();
+			dlpopUp.style.display = "block";
+			setTimeout(function(){
+				dlpopUp.style.display = "none";
+			}, sd);
+		}
+
+
+		function copy(){
+			var text = document.createElement("textarea");
+
+
+
+			text.value = formatedResults;
+			// alert(formatedResults);
+			//text.value = "" + formatedResults;
+			//"<texteara> " + formatedResults + " </texteara>".select();
+
+			document.body.appendChild(text);
+			text.select();
+			 try {
+			    var successful = document.execCommand("copy");
+			    var msg = successful ? 'successful' : 'unsuccessful';
+			    console.log('Copying text command was ' + msg);
+			  } catch (err) {
+			    console.log('Oops, unable to copy');
+			  }
+			  text.style.display = "none";
+
+
+
+			  collapse();
+			  var messageBox = document.getElementById("popUpCopySuccess");
+
+			  messageBox.style.display = "block";
+
+			  setTimeout(function(){
+				messageBox.style.display = "none";
+			}, sd);
+
+
+
+		}
+
+
+		function getResults(){
+			return formatedResults;
+		}
+
+		function showResults(){
+			var table = document.getElementById("table");
+
+			// table.innerHTML = "";
+			// var newHtml = "";
+			// var htmlCode = table.innerHTML.split("\n");
+
+			// htmlCode.forEach(function reduce(item, index){
+			// 	if(!(item.includes("<tr>") || item.includes("<td>"))){
+			// 		newHtml += item;
+			// 	}
+			// });
+
+			//alert(newHtml);
+
+			//table.innerHTML += "<table id='tbl' class='table table-striped table-bordered'>";
+
+
+            var d = "<table class='table table-striped table-bordered'>";
+           //var d = "";
+
+
+			results.forEach(function append(item, index){
+
+				 d += "<tr>" +
+                                "<td>" + index + "</td>" +
+                                "<td>" + item + "</td>" +
+                                "</tr>";
+			});
+			//$("#UserList").html(d + "</table>");
+
+			table.innerHTML += d;
+
+			table.innerHTML += "</table>";
+
+			table.style.display = "block";
+
+			//change button text to 'Another...'
+
+			var btn = document.getElementById("genBtn");
+			btn.innerHTML = "Another?";
+
+		}
+
+
+		function testForm() {
+			var signUpEmails = document.getElementById("SignUpArea").value.split("\n");
+			alert(signUpEmails);
+		}
+
+		function generate() {
+
+			if(!flag){
+				location.reload();
+			}
+			else{
+				flag = false;
+				var signUpEmails = document.getElementById("SignUpArea").value.split("\n");
+				var attendedEmails = document.getElementById("AttendedArea").value.split("\n");
+
+				results = [];
+				formatedResults = "\n";
+
+				//clean strings conatined in each array
+				//removes unwanted spaces and brakets
+
+				signUpEmails.forEach(function strClean(item, index){
+
+					if(signUpEmails[index].includes("	")){
+						signUpEmails[index] = item.substring(0, item.indexOf("	"));
+					}
+
+					if(signUpEmails[index].includes(" ")){
+						signUpEmails[index] = item.substring(0, item.indexOf(" "));
+					}
+				});
+
+				attendedEmails.forEach(function strClean(item, index){
+
+					if(attendedEmails[index].includes("	")){
+						attendedEmails[index] = item.substring(0, item.indexOf("	"));
+					}
+
+					if(attendedEmails[index].includes(" ")){
+						attendedEmails[index] = item.substring(0, item.indexOf(" "));
+					}
+				});
+
+				//main check...
+				//for each item in signUpEmails, check if it appears in attendedEmails
+
+				signUpEmails.forEach(function diff(item){
+					if(!attendedEmails.includes(item)){
+						results.push(item)
+					}
+				});
+
+
+				results.forEach(function printFormat(item){
+					formatedResults += item + "\n";
+				});
+
+
+
+				//alert("Users that Missed: " + formatedResults);
+				showResults();
+
+				var forms = document.getElementById("forms");
+
+				forms.style.display = "none";
+
+
+				//display FAB
+				var FAB  = document.getElementById("fab");
+				FAB.style.display = "block";
+
+			}
+		}
+
+	</script>
+
+</body>
+</html>
